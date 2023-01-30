@@ -8,7 +8,6 @@ public class RestApiManager : MonoBehaviour
 {
     [SerializeField] private List<RawImage> YourRawImage= new List<RawImage>();
     [SerializeField] private int user=1;
-    
     [SerializeField] private string myApi = "https://my-json-server.typicode.com/juanestebanct/JsonPruebas";
     [SerializeField] private string apiRickAndMorty = "https://rickandmortyapi.com/api/character/";
     public int[] cards;
@@ -23,7 +22,7 @@ public class RestApiManager : MonoBehaviour
     {
       StartCoroutine(GetUserInfo());
 
-      //  StartCoroutine(GetCharacter(1));
+ 
     }
 
     IEnumerator GetCharacter(int id,int posicion)
