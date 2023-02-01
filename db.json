@@ -2,18 +2,23 @@
   "users": [
     {
       "id": 1,
-      "name": "lololex",
+      "name": "Miguel",
       "deck": [ 1, 700, 744,20,25]
     },
     {
       "id": 2,
-      "name": "waro",
-      "deck": [ 1, 700, 744 ,20,1]
+      "name": "Charro",
+      "deck": [ 121, 200, 744 ,20,12]
     },
     {
       "id": 3,
-      "name": "lol",
-      "deck": [ 1, 700, 744 ,222,1]
+      "name": "Lorenzo",
+      "deck": [ 12, 21, 744 ,222,13]
+    },
+    {
+      "id": 4,
+      "name": "miguel",
+      "deck": [ 1, 22, 452 ,11,2]
     }
   ]
 }
