@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using TMPro;
 
 public class RestApiManager : MonoBehaviour
 {
     [SerializeField] private List<RawImage> YourRawImage= new List<RawImage>();
     [SerializeField] private int user=1;
+    [SerializeField] private TextMeshProUGUI usuario;
     [SerializeField] private string myApi = "https://my-json-server.typicode.com/juanestebanct/JsonPruebas";
     [SerializeField] private string apiRickAndMorty = "https://rickandmortyapi.com/api/character/";
     public int[] cards;
@@ -18,9 +20,19 @@ public class RestApiManager : MonoBehaviour
 
     }
 
-    public void GetCharacterClick()
+    public void GetCharacterVoid(string id)
     {
-      StartCoroutine(GetUserInfo());
+        if (int.TryParse(id,out _)  )
+        {
+            StartCoroutine(GetUserInfo(int.Parse(id)));
+            Debug.Log(id);
+        }
+        usuario.text = "Ingresa un numero";
+        Debug.Log("ingresa un numero");
+    }
+    public void GetCharacterClick(int id)
+    {
+      StartCoroutine(GetUserInfo(id));
 
  
     }
@@ -59,7 +71,7 @@ public class RestApiManager : MonoBehaviour
             byte[] results = www.downloadHandler.data;
         }
     }
-    IEnumerator GetUserInfo()
+    IEnumerator GetUserInfo(int user)
     {
         UnityWebRequest www = UnityWebRequest.Get(myApi+ "/users/"+ user);
         yield return www.Send();
@@ -74,20 +86,25 @@ public class RestApiManager : MonoBehaviour
            // Debug.Log(www.downloadHandler.text);
             if (www.responseCode == 200)
             {
+                string maso="";
                 User User = JsonUtility.FromJson<User>(www.downloadHandler.text);
                 Debug.Log(User.name);
+                usuario.text = "Usuario encontrado " + " nombre :"+User.name+",";
                 int posicion = 0;
                 foreach (int cart in User.deck)
                 {
                     yield return new WaitForSeconds(0.1f);
                     Debug.Log("carta:"+cart +"nombre"+ User.name);
+                    maso +=""+cart+",";
                     StartCoroutine(GetCharacter(cart,posicion));
                     posicion++;
                 }
+                usuario.text +=" maso " + maso;
 
             }
             else
             {
+                usuario.text = "Este Id no existe en la Api ";
                 string mensaje = "Status:" + www.responseCode;
                 mensaje += "\ncontent-type:" + www.GetResponseHeader("content-type");
                 mensaje += "\nError:" + www.error;
