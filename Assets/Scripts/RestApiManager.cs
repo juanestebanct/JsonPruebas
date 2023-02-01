@@ -99,7 +99,7 @@ public class RestApiManager : MonoBehaviour
                     StartCoroutine(GetCharacter(cart,posicion));
                     posicion++;
                 }
-                usuario.text +=" maso " + maso;
+                usuario.text +=" Baraja : " + maso;
 
             }
             else
